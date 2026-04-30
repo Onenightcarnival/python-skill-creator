@@ -87,9 +87,13 @@ def main() -> int:
     created = []
     if write_new(root / "pyproject.toml", render_pyproject(name, args.python, args.dep, dev_deps)):
         created.append("pyproject.toml")
+    if write_new(root / "scripts" / "__init__.py", ""):
+        created.append("scripts/__init__.py")
     if write_new(root / "scripts" / "check.py", CHECK_TEMPLATE):
         created.append("scripts/check.py")
         (root / "scripts" / "check.py").chmod(0o755)
+    if write_new(root / "tests" / "__init__.py", ""):
+        created.append("tests/__init__.py")
     if write_new(root / "tests" / "test_skill_files.py", render_test_file()):
         created.append("tests/test_skill_files.py")
 

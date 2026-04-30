@@ -20,5 +20,7 @@ def test_scaffold_adds_python_project_files(tmp_path: Path, monkeypatch) -> None
     pyproject = (skill_dir / "pyproject.toml").read_text(encoding="utf-8")
     assert 'name = "demo-skill"' in pyproject
     assert '"click>=8",' in pyproject
+    assert (skill_dir / "scripts" / "__init__.py").exists()
     assert (skill_dir / "scripts" / "check.py").exists()
+    assert (skill_dir / "tests" / "__init__.py").exists()
     assert (skill_dir / "tests" / "test_skill_files.py").exists()
