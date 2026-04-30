@@ -1,0 +1,6 @@
+interface:
+  display_name: "Python Skill Creator"
+  short_description: "为 Python skill 补齐工程规范"
+  default_prompt: "Use $python-skill-creator to create a portable Python-backed Codex skill."
+policy:
+  allow_implicit_invocation: true
