@@ -9,13 +9,14 @@
 
 ## 仓库结构
 
-- skill 放在 `skills/<skill-name>/` 下。
-- 当前 skill 是 `skills/python-skill-creator/`。
-- 根目录只放仓库级文件，比如 `LICENSE`、`.gitignore`、`AGENTS.md`。
+- 这个仓库是单 skill repo，仓库根目录就是 skill root。
+- `SKILL.md`、`pyproject.toml`、`uv.lock`、`scripts/`、`tests/` 都放在根目录。
+- 不再使用 `skills/<skill-name>/` 这种 monorepo 结构。
 
 ## Python Skill 约定
 
 - Python-backed skill 要按小工程处理，不只写 `SKILL.md`。
+- `SKILL.md` 先符合 Agent Skills spec，再叠加 Python 工程规范。
 - 需要 Python 运行时的 skill 应包含 `pyproject.toml`、`uv.lock`、固定验证命令和最小测试。
 - 依赖用 `uv` 管理，`uv.lock` 要提交。
 - 缓存、虚拟环境、IDE 文件不要提交。
@@ -25,7 +26,8 @@
 在 skill 目录内运行：
 
 ```bash
-UV_CACHE_DIR=../../.uv-cache uv run python scripts/check.py
-UV_CACHE_DIR=../../.uv-cache uv run pytest
-UV_CACHE_DIR=../../.uv-cache uv run ruff check .
+UV_CACHE_DIR=.uv-cache uv run python scripts/validate_skill.py . --python
+UV_CACHE_DIR=.uv-cache uv run python scripts/check.py
+UV_CACHE_DIR=.uv-cache uv run pytest
+UV_CACHE_DIR=.uv-cache uv run ruff check .
 ```

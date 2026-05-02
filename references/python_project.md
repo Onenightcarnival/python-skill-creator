@@ -29,6 +29,21 @@ Keep runtime dependencies in `project.dependencies`. Put test and lint tools in 
 
 Commit `uv.lock`. For skills, the lock file is part of portability.
 
+## Format Layering
+
+Validate the skill in two layers:
+
+1. Agent Skills spec: `SKILL.md`, frontmatter, directory name, optional metadata, and progressive-disclosure structure.
+2. Python engineering rules: `pyproject.toml`, `uv.lock`, package dirs, check scripts, tests, and runtime notes.
+
+Run:
+
+```bash
+uv run python scripts/validate_skill.py /path/to/skill --python
+```
+
+Do not loosen the Agent Skills spec to fit Python packaging. If the repo is a single Python-backed skill, prefer making the repo root the skill root.
+
 ## Validation Command
 
 Every Python-backed skill should have one cheap command that proves the runtime works:

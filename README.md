@@ -17,6 +17,7 @@
 
 Python-backed skill 至少应该有：
 
+- 符合 Agent Skills spec 的 `SKILL.md`：`name`、`description`、frontmatter、目录名都要对。
 - `pyproject.toml`：声明 Python 版本和依赖。
 - `uv.lock`：锁住依赖版本。
 - `scripts/check.py`：提供一个便宜、可重复的自检命令。
@@ -30,30 +31,29 @@ Python-backed skill 至少应该有：
 |-- AGENTS.md
 |-- LICENSE
 |-- README.md
-`-- skills/
-    `-- python-skill-creator/
-        |-- SKILL.md
-        |-- agents/
-        |   `-- openai.yaml
-        |-- pyproject.toml
-        |-- uv.lock
-        |-- references/
-        |   `-- python_project.md
-        |-- scripts/
-        |   |-- __init__.py
-        |   |-- check.py
-        |   `-- scaffold_python_skill.py
-        `-- tests/
-            |-- __init__.py
-            `-- test_scaffold_python_skill.py
+|-- SKILL.md
+|-- agents/
+|   `-- openai.yaml
+|-- pyproject.toml
+|-- uv.lock
+|-- references/
+|   `-- python_project.md
+|-- scripts/
+|   |-- __init__.py
+|   |-- check.py
+|   |-- scaffold_python_skill.py
+|   `-- validate_skill.py
+`-- tests/
+    |-- __init__.py
+    `-- test_scaffold_python_skill.py
 ```
 
 ## 安装
 
-从这个仓库安装时，skill 路径是：
+这个仓库本身就是 skill 目录，skill 路径是仓库根目录：
 
 ```text
-skills/python-skill-creator
+.
 ```
 
 用 Codex 的 skill installer 安装时，指定这个 path 即可。
@@ -71,21 +71,38 @@ Use $python-skill-creator to create a portable Python-backed Codex skill.
 也可以直接使用脚手架脚本给已有 skill 补基础文件：
 
 ```bash
-cd skills/python-skill-creator
-UV_CACHE_DIR=../../.uv-cache uv run python scripts/scaffold_python_skill.py /path/to/skill-name --python ">=3.11"
+UV_CACHE_DIR=.uv-cache uv run python scripts/scaffold_python_skill.py /path/to/skill-name --python ">=3.11"
 ```
 
 脚手架只生成起点。生成后还要根据实际 skill 调整依赖、检查命令、测试和运行说明。
 
-## 验证
+## 校验
 
-在 skill 目录运行：
+校验器分两层：
+
+- Agent Skills spec：检查 `SKILL.md`、frontmatter、目录名、`description`、`compatibility`、`metadata`、`agents/openai.yaml` 等。
+- Python 工程规范：检查 `pyproject.toml`、`uv.lock`、`scripts/check.py`、`__init__.py`、Python 依赖声明等。
+
+检查当前 skill：
 
 ```bash
-cd skills/python-skill-creator
-UV_CACHE_DIR=../../.uv-cache uv run python scripts/check.py
-UV_CACHE_DIR=../../.uv-cache uv run pytest
-UV_CACHE_DIR=../../.uv-cache uv run ruff check .
+UV_CACHE_DIR=.uv-cache uv run python scripts/validate_skill.py . --python
+```
+
+检查这个 skill 产出的新 skill：
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run python scripts/validate_skill.py /path/to/skill-name --python
+```
+
+## 验证
+
+在仓库根目录运行：
+
+```bash
+UV_CACHE_DIR=.uv-cache uv run python scripts/check.py
+UV_CACHE_DIR=.uv-cache uv run pytest
+UV_CACHE_DIR=.uv-cache uv run ruff check .
 ```
 
 ## 推荐项目描述

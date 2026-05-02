@@ -3,7 +3,9 @@ name = "python-skill-creator"
 version = "0.1.0"
 description = "Create portable Codex skills with uv-managed Python runtimes."
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "pyyaml>=6.0",
+]
 
 [dependency-groups]
 dev = [
@@ -14,6 +16,3 @@ dev = [
 [tool.ruff]
 line-length = 100
 target-version = "py311"
-
-[tool.pytest.ini_options]
-pythonpath = ["."]

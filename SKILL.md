@@ -11,10 +11,12 @@ Use this skill after `skill-creator` when the skill has Python code or Python de
 
 The goal is simple: a Python-backed skill should behave like a small project, not a loose folder of prompts and scripts. The user should be able to copy the skill, install dependencies, run one fixed check command, and know whether the runtime pieces work.
 
+Start with the Agent Skills spec, then add Python engineering rules. Do not replace the base skill format with Python conventions.
+
 ## Workflow
 
 1. First create or update the normal skill surface:
-   - `SKILL.md` with clear trigger metadata and concise workflow instructions.
+   - `SKILL.md` that follows the Agent Skills spec.
    - `agents/openai.yaml` when UI metadata is useful.
    - `references/`, `assets/`, and `scripts/` only when they support the skill directly.
 
@@ -67,6 +69,7 @@ Use these commands unless the target repo already has equivalent commands:
 
 ```bash
 uv lock
+uv run python scripts/validate_skill.py . --python
 uv run python scripts/check.py
 uv run pytest
 uv run ruff check .
@@ -86,10 +89,17 @@ uv run python scripts/scaffold_python_skill.py /path/to/skill-name --python ">=3
 
 After scaffolding, inspect the generated files and tune dependencies, commands, and runtime notes to match the actual skill.
 
+Validate any generated skill from this skill's root:
+
+```bash
+uv run python scripts/validate_skill.py /path/to/skill-name --python
+```
+
 ## Portability Check
 
 Before finishing, confirm:
 
+- `SKILL.md` passes Agent Skills spec checks
 - dependencies are declared and locked
 - fixed commands are listed in `SKILL.md` or a linked reference
 - path inputs and outputs are explicit
