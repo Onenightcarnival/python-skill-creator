@@ -104,17 +104,3 @@ UV_CACHE_DIR=.uv-cache uv run python scripts/check.py
 UV_CACHE_DIR=.uv-cache uv run pytest
 UV_CACHE_DIR=.uv-cache uv run ruff check .
 ```
-
-## 推荐项目描述
-
-GitHub repo description 建议写：
-
-```text
-Create portable Codex skills with uv-managed Python runtimes.
-```
-
-如果想更口语一点，可以写：
-
-```text
-A Codex skill for turning Python-backed skills into reproducible mini projects.
-```
