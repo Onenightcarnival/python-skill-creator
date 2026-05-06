@@ -28,24 +28,24 @@ Python-backed skill 至少应该有：
 
 ```text
 .
-|-- AGENTS.md
-|-- LICENSE
-|-- README.md
-|-- SKILL.md
-|-- agents/
-|   `-- openai.yaml
-|-- pyproject.toml
-|-- uv.lock
-|-- references/
-|   `-- python_project.md
-|-- scripts/
+|-- scripts/                         # OpenAI 标准：可执行代码
 |   |-- __init__.py
 |   |-- check.py
 |   |-- scaffold_python_skill.py
 |   `-- validate_skill.py
-`-- tests/
-    |-- __init__.py
-    `-- test_scaffold_python_skill.py
+|-- references/                      # OpenAI 标准：补充文档
+|   `-- python_project.md
+|-- agents/                          # 本 skill 新增：agent 侧展示信息和默认提示
+|   `-- openai.yaml
+|-- tests/                           # 本 skill 新增：Python 行为的最小测试
+|   |-- __init__.py
+|   `-- test_scaffold_python_skill.py
+|-- SKILL.md                         # OpenAI 标准：metadata 和 instructions
+|-- pyproject.toml                   # 本 skill 新增：Python 版本和依赖声明
+|-- uv.lock                          # 本 skill 新增：锁定 Python 依赖版本
+|-- AGENTS.md
+|-- LICENSE
+`-- README.md
 ```
 
 ## 安装

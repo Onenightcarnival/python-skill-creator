@@ -45,20 +45,22 @@ For a Python-backed skill, create or check this shape:
 
 ```text
 skill-name/
-|-- SKILL.md
-|-- agents/
-|   `-- openai.yaml
-|-- pyproject.toml
-|-- uv.lock
-|-- scripts/
+|-- scripts/          # OpenAI standard: executable code
+|   |-- __init__.py
 |   |-- check.py
 |   `-- ...
-|-- tests/
-|   `-- test_*.py
-|-- references/
+|-- references/       # OpenAI standard: supporting documentation
 |   `-- ...
-`-- assets/
-    `-- ...
+|-- assets/           # OpenAI standard: templates and resources
+|   `-- ...
+|-- agents/           # Added: agent-specific UI metadata or default prompts
+|   `-- openai.yaml
+|-- tests/            # Added: minimal tests for Python behavior
+|   |-- __init__.py
+|   `-- test_*.py
+|-- SKILL.md          # OpenAI standard: metadata and instructions
+|-- pyproject.toml    # Added: Python version and dependencies
+`-- uv.lock           # Added: locked Python dependency graph
 ```
 
 `scripts/check.py` should be cheap and deterministic. It should verify imports, fixture availability, basic script behavior, and any required external binary that the skill depends on.
