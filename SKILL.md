@@ -45,20 +45,20 @@ For a Python-backed skill, create or check this shape:
 
 ```text
 skill-name/
-|-- scripts/          # OpenAI standard: executable code
+|-- scripts/          # OpenAI standard - optional: executable code
 |   |-- __init__.py
 |   |-- check.py
 |   `-- ...
-|-- references/       # OpenAI standard: supporting documentation
+|-- references/       # OpenAI standard - optional: supporting documentation
 |   `-- ...
-|-- assets/           # OpenAI standard: templates and resources
+|-- assets/           # OpenAI standard - optional: templates and resources
 |   `-- ...
-|-- agents/           # Added: agent-specific UI metadata or default prompts
+|-- agents/           # OpenAI standard - optional: UI metadata or default prompts
 |   `-- openai.yaml
 |-- tests/            # Added: minimal tests for Python behavior
 |   |-- __init__.py
 |   `-- test_*.py
-|-- SKILL.md          # OpenAI standard: metadata and instructions
+|-- SKILL.md          # OpenAI standard - required: metadata and instructions
 |-- pyproject.toml    # Added: Python version and dependencies
 `-- uv.lock           # Added: locked Python dependency graph
 ```
